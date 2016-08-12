@@ -1,5 +1,6 @@
 (function($) {
     $.fn.createSimpleImgGallery = function() {
+        $(this).append($('<div style="clear:both;" />'));
         var lElements_jqe = $(this).find('a');
         var lElementsCount_int = lElements_jqe.length;
         for (var i = 0; i < lElementsCount_int; i++) {
