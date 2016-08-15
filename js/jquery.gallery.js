@@ -13,6 +13,9 @@
                 margin: "2px"
             });
         }
+        var l$CachedImages = [];
+        var l$CurrentImage = null;
+        var l$PrevImage = null;
 
         var lOverlay_jqe = $('<div id="codengineering_overlay"></div>'),
                 lWrapper_jqe = $('<div class="wrapper"></div>'),
@@ -26,11 +29,10 @@
                 lRotateRight_jqe = $('<a><i class="fa fa-rotate-right pointer"></i></a>'),
                 lLoadingWrapper_jqe = $('<div class="loading_wrapper"></div>'),
                 lLoadingText_jqe = $('<div class="loading_text"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i></div>'),
-                lImage_jqe = $("<img>"),
                 lCaption_jqe = $("<p></p>");
 
         lOverlay_jqe.append(lWrapper_jqe);
-        lImgInnerWrapper_jqp.append(lImage_jqe);
+//        lImgInnerWrapper_jqp.append(lImage_jqe);
         lImgWrapper_jqp.append(lImgInnerWrapper_jqp);
         lSettingsWrapper_jqe.append(lSettings_jqe);
         lSettings_jqe.append('&nbsp;').append(lRotateLeft_jqe).append('&nbsp;').append(lRotateRight_jqe).append('&nbsp;');
@@ -48,39 +50,63 @@
                 lNext_e = null;
 
         var redrawImage = function() {
-            var lWrapperHeight = lWrapper_jqe.height();
-            var lWrapperWidth = lWrapper_jqe.width();
-            var lImageCurrentRotation_int = parseInt(lImgInnerWrapper_jqp.attr('data-rotation'));
-            if ((lImageCurrentRotation_int % 180) !== 0) {
-                lWrapperHeight = lWrapper_jqe.width();
-                lWrapperWidth = lWrapper_jqe.height();
+            //защита от первоначального вызова через window.resize
+            if (l$CurrentImage) {
+                l$PrevImage && l$PrevImage.remove();
+                l$CurrentImage.appendTo(lImgInnerWrapper_jqp);
+                
+                var lWrapperHeight = lWrapper_jqe.height();
+                var lWrapperWidth = lWrapper_jqe.width();
+                var lImageCurrentRotation_int = parseInt(lImgInnerWrapper_jqp.attr('data-rotation'));
+                if ((lImageCurrentRotation_int % 180) !== 0) {
+                    lWrapperHeight = lWrapper_jqe.width();
+                    lWrapperWidth = lWrapper_jqe.height();
+                }
+
+                l$CurrentImage.width('auto');
+                l$CurrentImage.height(lWrapperHeight);
+                if (l$CurrentImage.width() > lWrapperWidth) {
+                    l$CurrentImage.width(lWrapperWidth);
+                    l$CurrentImage.height('auto');
+                }
+                var lImageHeight = l$CurrentImage.height();
+                var lImageWidth = l$CurrentImage.width();
+                lImgInnerWrapper_jqp.css('margin-top', (-lImageHeight / 2) + 'px');
+                lImgInnerWrapper_jqp.css('margin-left', (-lImageWidth / 2) + 'px');
+
+                lNavBtnLeft_jqe.css('line-height', lNavBtnLeft_jqe.height() + 'px');
+                lNavBtnRight_jqe.css('line-height', lNavBtnRight_jqe.height() + 'px');
+
+                lLoadingWrapper_jqe.css('line-height', lWrapper_jqe.height() + 'px');
             }
-
-            lImage_jqe.width('auto');
-            lImage_jqe.height(lWrapperHeight);
-            if (lImage_jqe.width() > lWrapperWidth) {
-                lImage_jqe.width(lWrapperWidth);
-                lImage_jqe.height('auto');
-            }
-            var lImageHeight = lImage_jqe.height();
-            var lImageWidth = lImage_jqe.width();
-            lImgInnerWrapper_jqp.css('margin-top', (-lImageHeight / 2) + 'px');
-            lImgInnerWrapper_jqp.css('margin-left', (-lImageWidth / 2) + 'px');
-
-            lNavBtnLeft_jqe.css('line-height', lNavBtnLeft_jqe.height() + 'px');
-            lNavBtnRight_jqe.css('line-height', lNavBtnRight_jqe.height() + 'px');
-
-            lLoadingWrapper_jqe.css('line-height', lWrapper_jqe.height() + 'px');
         };
-        var showImage = function(aId) {
+        var setImage = function(aId) {
+            lOverlay_jqe.show();
+            lWrapper_jqe.animate({opacity: 1}, 300);
+            
             aId = parseInt(aId);
             var lIsLast_bl = aId === (lElementsCount_int - 1);
             var lIsFirst_bl = aId === 0;
             var lCurrentImageLink_jqe = $(lElements_jqe[aId]);
-            lImage_jqe.attr("src", lCurrentImageLink_jqe.attr("href"));
+            //тут надо удалить текущее изображение,
+            //для этого заводим специальную переменную
+            console.log(l$CachedImages[aId], Boolean(l$CachedImages[aId]));
+            if (!l$CachedImages[aId]) {
+                //грузим изображение и вставляем в массив кешированных
+                var l$CachingImage = $('<img />');
+                l$CachingImage.attr("src", lCurrentImageLink_jqe.attr("href"));
+                l$CachingImage.on('load', function() {
+                    l$CachedImages[aId] = l$CachingImage;
+                    lLoadingText_jqe.animate({opacity: 0}, 100);
+                    showImage(aId);
+                });
+                
+                lLoadingText_jqe.animate({opacity: 1}, 100);
+            } else {
+                showImage(aId);
+            }
             var captionText = lCurrentImageLink_jqe.children("img").attr("alt");
             lCaption_jqe.text(captionText);
-            lLoadingText_jqe.animate({opacity: 1}, 100);
 
             lIsFirst_bl && lNavBtnLeft_jqe.hide();
             if (!lIsFirst_bl) {
@@ -92,9 +118,12 @@
                 lNext_e = lElements_jqe[1 + aId];
                 lNavBtnRight_jqe.show();
             }
-
-            lOverlay_jqe.show();
-            lWrapper_jqe.animate({opacity: 1}, 300);
+        };
+        var showImage = function (aId) {
+            l$PrevImage = l$CurrentImage;
+            l$CurrentImage = l$CachedImages[aId];
+            setImageRotation(0);
+            redrawImage();
         };
         var rotateImage = function(aDeg) {
             aDeg = parseInt(aDeg);
@@ -118,15 +147,15 @@
 
         lNavBtnLeft_jqe.click(function(e) {
             e.stopPropagation();
-            showImage($(lPrev_e).attr('data-id'));
+            setImage($(lPrev_e).attr('data-id'));
         });
         lNavBtnRight_jqe.click(function(e) {
             e.stopPropagation();
-            showImage($(lNext_e).attr('data-id'));
+            setImage($(lNext_e).attr('data-id'));
         });
         lElements_jqe.click(function(e) {
             e.preventDefault();
-            showImage($(this).attr('data-id'));
+            setImage($(this).attr('data-id'));
         });
         lRotateLeft_jqe.click(function(e) {
             e.stopPropagation();
@@ -135,11 +164,6 @@
         lRotateRight_jqe.click(function(e) {
             e.stopPropagation();
             rotateImage(90);
-        });
-        lImage_jqe.on('load', function() {
-            lLoadingText_jqe.animate({opacity: 0}, 100);
-            setImageRotation(0);
-            redrawImage();
         });
 
         $(window).on("resize", redrawImage);
