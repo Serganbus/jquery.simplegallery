@@ -35,9 +35,9 @@
     margin-left: -64px;
     background: rgba(0,0,0,0.8);
 }
-#codengineering_overlay .settings_wrapper .settings a {
-    /* color: #333; */
-}
+/*#codengineering_overlay .settings_wrapper .settings a {
+     color: #333;
+}*/
 #codengineering_overlay .settings_wrapper .settings a:hover {
     color: #ebebeb;
 }
@@ -78,6 +78,7 @@
     margin-top: 15px;
 }
 #codengineering_overlay .pointer:hover {
+    color: #333;
     cursor: pointer;
 }
 #codengineering_overlay .loading_text {
