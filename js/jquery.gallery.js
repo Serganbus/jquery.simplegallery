@@ -88,9 +88,7 @@
             var lIsLast_bl = aId === (lElementsCount_int - 1);
             var lIsFirst_bl = aId === 0;
             var lCurrentImageLink_jqe = $(lElements_jqe[aId]);
-            //тут надо удалить текущее изображение,
-            //для этого заводим специальную переменную
-            console.log(l$CachedImages[aId], Boolean(l$CachedImages[aId]));
+            
             if (!l$CachedImages[aId]) {
                 //грузим изображение и вставляем в массив кешированных
                 var l$CachingImage = $('<img />');
