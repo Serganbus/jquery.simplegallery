@@ -38,9 +38,9 @@
 /*#codengineering_overlay .settings_wrapper .settings a {
      color: #333;
 }*/
-#codengineering_overlay .settings_wrapper .settings a:hover {
+/*#codengineering_overlay .settings_wrapper .settings a:hover {
     color: #ebebeb;
-}
+}*/
 #codengineering_overlay .img_wrapper {
     position:absolute;
     top: 50%;
@@ -55,9 +55,9 @@
     width:50px;
     height:100%;
 }
-#codengineering_overlay .nav-btn:hover {
+/*#codengineering_overlay .nav-btn:hover {
     color: #ebebeb;
-}
+}*/
 #codengineering_overlay .nav-btn-left {
     left: -50px;
 }
@@ -77,8 +77,11 @@
     color: #fff;
     margin-top: 15px;
 }
-#codengineering_overlay .pointer:hover {
+#codengineering_overlay .pointer {
     color: #333;
+}
+#codengineering_overlay .pointer:hover {
+    color: #ebebeb;
     cursor: pointer;
 }
 #codengineering_overlay .loading_text {
