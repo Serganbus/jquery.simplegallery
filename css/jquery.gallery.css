@@ -35,12 +35,6 @@
     margin-left: -64px;
     background: rgba(0,0,0,0.8);
 }
-/*#codengineering_overlay .settings_wrapper .settings a {
-     color: #333;
-}*/
-/*#codengineering_overlay .settings_wrapper .settings a:hover {
-    color: #ebebeb;
-}*/
 #codengineering_overlay .img_wrapper {
     position:absolute;
     top: 50%;
@@ -55,19 +49,11 @@
     width:50px;
     height:100%;
 }
-/*#codengineering_overlay .nav-btn:hover {
-    color: #ebebeb;
-}*/
 #codengineering_overlay .nav-btn-left {
     left: -50px;
 }
 #codengineering_overlay .nav-btn-right {
     right: -50px;
-}
-
-#codengineering_overlay img {
-    /*max-width: 95%;
-    max-height: 95%;*/
 }
 #codengineering_overlay p:first-of-type {
     font-weight: bold;
