@@ -27,15 +27,15 @@
                 lSettings_jqe = $('<div class="settings"></div>'),
                 lRotateLeft_jqe = $('<a><i class="fa fa-rotate-left pointer"></i></a>'),
                 lRotateRight_jqe = $('<a><i class="fa fa-rotate-right pointer"></i></a>'),
+                lDownload_jqe = $('<a download><i class="fa fa-download pointer"></i></a>'),
                 lLoadingWrapper_jqe = $('<div class="loading_wrapper"></div>'),
                 lLoadingText_jqe = $('<div class="loading_text"><i class="fa fa-refresh fa-spin fa-3x fa-fw margin-bottom"></i></div>'),
                 lCaption_jqe = $("<p></p>");
 
         lOverlay_jqe.append(lWrapper_jqe);
-//        lImgInnerWrapper_jqp.append(lImage_jqe);
         lImgWrapper_jqp.append(lImgInnerWrapper_jqp);
         lSettingsWrapper_jqe.append(lSettings_jqe);
-        lSettings_jqe.append('&nbsp;').append(lRotateLeft_jqe).append('&nbsp;').append(lRotateRight_jqe).append('&nbsp;');
+        lSettings_jqe.append('&nbsp;').append(lRotateLeft_jqe).append('&nbsp;').append(lRotateRight_jqe).append('&nbsp;').append(lDownload_jqe).append('&nbsp;');
         lLoadingWrapper_jqe.append(lLoadingText_jqe);
         lWrapper_jqe.append(lImgWrapper_jqp)
                 .append(lSettingsWrapper_jqe)
@@ -120,6 +120,7 @@
         var showImage = function (aId) {
             l$PrevImage = l$CurrentImage;
             l$CurrentImage = l$CachedImages[aId];
+            lDownload_jqe.attr('href', l$CurrentImage.attr('src'));
             setImageRotation(0);
             redrawImage();
         };
@@ -162,6 +163,9 @@
         lRotateRight_jqe.click(function(e) {
             e.stopPropagation();
             rotateImage(90);
+        });
+        lDownload_jqe.click(function (e){
+            e.stopPropagation();
         });
 
         $(window).on("resize", redrawImage);
