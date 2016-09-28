@@ -3,7 +3,7 @@
     "title": "Simple image gallery",
     "description": "Simple image gallery with abilities of sliding, rotation and downloading images. Simple to use. of For jquery.",
     "keywords": ["ecosystem:jquery", "jquery-plugin", "gallery", "image", "rotation", "ui", "slideshow", "image", "html5", "animation", "jquery", "photo", "responsive"],
-    "version": "0.0.1",
+    "version": "0.0.2",
     "author": {
         "name": "Sergey Ivanov",
         "email": "sega234@mail.ru",
