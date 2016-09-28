@@ -1,10 +1,32 @@
 {
-  "name": "simple-jquery-gallery",
-  "version": "0.0.1",
-  "devDependencies": {
-    "grunt": "^0.4.5",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-cssmin": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0"
-  }
+    "name": "jquery-simplegallery",
+    "title": "Simple image gallery",
+    "description": "Simple image gallery with abilities of sliding, rotation and downloading images. Simple to use. of For jquery.",
+    "keywords": ["gallery", "image", "rotation", "ui", "slideshow", "image", "html5", "animation", "jquery", "photo", "responsive"],
+    "version": "0.0.1",
+    "author": {
+        "name": "Sergey Ivanov",
+        "email": "sega234@mail.ru",
+        "web": "http://codengineering.ru"
+    },
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Serganbus/jquery.simplegallery/issues"
+    },
+    "main": "release/jquery.gallery.min.js",
+    "style": "release/jquery.gallery.min.css",
+    "homepage": "http://codengineering.ru/post/33/",
+    "engines": {
+        "node": ">= 6.3.1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Serganbus/jquery.simplegallery.git"
+    },
+    "devDependencies": {
+        "grunt": "^0.4.5",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-cssmin": "^1.0.1",
+        "grunt-contrib-uglify": "^2.0.0"
+    }
 }
