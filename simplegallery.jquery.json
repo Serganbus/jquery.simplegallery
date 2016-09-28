@@ -1,0 +1,29 @@
+{
+    "name": "simplegallery",
+    "title": "Simple image gallery",
+    "description": "Simple image gallery with abilities of sliding, rotation and downloading images. Simple to use. of For jquery.",
+    "version": "0.0.1",
+    "homepage": "http://codengineering.ru/post/33/",
+    "demo": "http://codengineering.ru/post/33/",
+    "docs": "http://codengineering.ru/post/33/",
+    "author": {
+        "name": "Sergey Ivanov",
+        "email": "sega234@mail.ru",
+        "url": "http://codengineering.ru"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Serganbus/jquery.simplegallery.git"
+    },
+    "bugs": "https://github.com/Serganbus/jquery.simplegallery/issues",
+    "dependencies": {
+        "jquery": ">=2.1.4"
+    },
+    "keywords": ["gallery", "image", "rotation", "ui", "slideshow", "image", "html5", "animation", "jquery", "photo", "responsive"],
+    "licenses": [
+        {
+            "type": "MIT",
+            "url": "http://www.opensource.org/licenses/mit-license.php"
+        }
+    ]
+}
