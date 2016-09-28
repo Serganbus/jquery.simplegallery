@@ -1,7 +1,8 @@
 {
-    "name": "simplegallery",
+    "name": "jquery-simplegallery",
     "title": "Simple image gallery",
     "description": "Simple image gallery with abilities of sliding, rotation and downloading images. Simple to use. of For jquery.",
+    "keywords": ["gallery", "image", "rotation", "ui", "slideshow", "image", "html5", "animation", "jquery", "photo", "responsive"],
     "version": "0.0.1",
     "homepage": "http://codengineering.ru/post/33/",
     "demo": "http://codengineering.ru/post/33/",
@@ -19,7 +20,6 @@
     "dependencies": {
         "jquery": ">=2.1.4"
     },
-    "keywords": ["gallery", "image", "rotation", "ui", "slideshow", "image", "html5", "animation", "jquery", "photo", "responsive"],
     "licenses": [
         {
             "type": "MIT",
